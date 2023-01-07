@@ -1,11 +1,10 @@
 import React from 'react';
 import styled from 'styled-components/macro';
 import { QUERIES } from '../../constants';
-import { BorderedAnchor } from '../../utils';
 
 const OpinionStory = ({ id, title, author, avatar }) => {
   return (
-    <OpinionAnchor href={`/story/${id}`}>
+    <a href={`/story/${id}`}>
       <Wrapper>
         <Avatar alt="" src={avatar} />
         <Content>
@@ -13,32 +12,12 @@ const OpinionStory = ({ id, title, author, avatar }) => {
           <ArticleTitle>{title}</ArticleTitle>
         </Content>
       </Wrapper>
-    </OpinionAnchor>
+    </a>
   );
 };
 
-const OpinionAnchor = styled(BorderedAnchor)`
-  @media ${QUERIES.tabletOnly} {
-    flex: 1;
-    :not(:last-of-type) {
-      padding: 0;
-      border-bottom: none;
-    }
-    :not(:first-of-type) {
-      padding: 0;
-    } 
-  }
-`;
-
 const Wrapper = styled.article`
   color: var(--color-gray-900);
-  display: flex;
-  flex-direction: row-reverse;
-  gap: 24px;
-
-  @media ${QUERIES.tabletOnly} {
-    display: revert;
-  }
 `;
 
 const Avatar = styled.img`
@@ -47,6 +26,13 @@ const Avatar = styled.img`
   height: 48px;
   border-radius: 50%;
   object-fit: cover;
+  float: right;
+  margin: 0 0 16px 16px;
+  
+  @media ${QUERIES.tabletOnly} {
+    float: revert;
+    margin: 0 0 8px;
+  }
 `;
 
 const Content = styled.div`

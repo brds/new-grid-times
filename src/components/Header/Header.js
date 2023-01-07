@@ -35,7 +35,7 @@ const Header = () => {
         <Button>
           Subscribe 
         </Button>
-        <a href="#a">Already a subscriber?</a>
+        <SubLink href="/">Already a subscriber?</SubLink>
       </RightActions>
     </Wrapper>
   );
@@ -43,13 +43,17 @@ const Header = () => {
 
 const Wrapper = styled(MaxWidthWrapper)`
   padding: 0;
+
+  @media ${QUERIES.tabletAndUp} {
+    margin-bottom: 72px;
+  }
+
   @media ${QUERIES.laptopAndUp} {
     display: grid;
-    grid-template-columns: ${160 / 16}rem 1fr  ${160 / 16}rem;
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
     padding-inline: 32px;
-    height: ${98 / 16}rem;
-    margin-bottom: 72px;
+    margin-top: 16px;
   }
 `;
 
@@ -68,6 +72,7 @@ const SuperHeader = styled.div`
 const Row = styled(MaxWidthWrapper)`
   display: flex;
   justify-content: space-between;
+
   @media ${QUERIES.laptopAndUp} {
     display: revert;
     justify-content: revert;
@@ -96,23 +101,25 @@ const MobileActionGroup = styled(ActionGroup)`
 
 const RightActions = styled.div`
   display: none;
+
   @media ${QUERIES.laptopAndUp} {
-    align-self: end;
     justify-self: end;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 8px;
-  }
-  & a {
-    font-family: var(--font-family-serif);
-    text-decoration: underline;
-    color: var(--color-gray-900);
-    font-style: italic;
-    font-size: ${14 / 16}rem;
+    display: revert;
+    position: relative;
   }
 `;
+
+const SubLink = styled.a`
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  transform: translateY(8px);
+  font-family: var(--font-family-serif);
+  text-decoration: underline;
+  color: var(--color-gray-900);
+  font-style: italic;
+  font-size: ${14 / 16}rem;
+`
 
 const MainHeader = styled(MaxWidthWrapper)`
   display: flex;
@@ -120,6 +127,12 @@ const MainHeader = styled(MaxWidthWrapper)`
   justify-content: center;
   margin-top: 32px;
   margin-bottom: 48px;
+
+  @media ${QUERIES.tabletAndUp} {
+    margin-top: 48px;
+    margin-bottom: 72px;
+  }
+
   @media ${QUERIES.laptopAndUp} {
     margin: 0;
   }

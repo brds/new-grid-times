@@ -37,7 +37,9 @@ const SpecialtyStoryGrid = () => {
         </SectionTitle>
         <SportsStories>
           {SPORTS_STORIES.map((data) => (
-            <MiniStory key={data.id} {...data} />
+            <SportsStoryWrapper key={data.id}>
+              <MiniStory {...data} />
+            </SportsStoryWrapper>
           ))}
         </SportsStories>
       </SportsSection>
@@ -46,12 +48,18 @@ const SpecialtyStoryGrid = () => {
 };
 
 const Wrapper = styled.div`
-  --spacing: 24px;
+  --spacing: 16px;
   display: grid;
-  gap: calc(var(--spacing) * 2);
+  gap: 48px;
+
+  @media ${QUERIES.tabletAndUp} {
+    gap: 64px;
+    grid-template-columns: 100%; 
+  }
+  
   @media ${QUERIES.laptopAndUp} {
-    grid-template-columns: 1fr 1fr;
     gap: 0;
+    grid-template-columns: 1fr minmax(0, 1fr);
   }
 `;
 
@@ -59,7 +67,6 @@ const MarketsSection = styled.section`
   @media ${QUERIES.laptopAndUp} {
     border-right: 1px solid var(--color-gray-300);
     padding-right: var(--spacing);
-    margin-right: var(--spacing);
   }
 `;
 
@@ -71,21 +78,33 @@ const MarketCards = styled.div`
 
 const SportsSection = styled.section`
   @media ${QUERIES.tabletAndUp} {
-    overflow: hidden;
     display: flex;
     flex-direction: column;
   }
-`;
+  
+  @media ${QUERIES.laptopAndUp} {
+    padding-left: var(--spacing);
+  }
+  `;
 
 const SportsStories = styled.div`
   display: grid;
   gap: 16px;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(165px, 1fr));
+  
   @media ${QUERIES.tabletAndUp} {
     flex: 1;
     display: flex;
-    padding-bottom: 8px;
+    grid-template-columns: revert;
+    /** Allow the nested sport stories to scroll */
     overflow: auto;
+    padding-bottom: 8px;
+  }
+`;
+
+const SportsStoryWrapper = styled.div`
+  @media ${QUERIES.tabletAndUp} {
+    min-width: 220px;
   }
 `;
 
