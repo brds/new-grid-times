@@ -1,22 +1,44 @@
 import React from 'react';
 import styled from 'styled-components/macro';
+import { QUERIES } from '../../constants';
+import { BorderedAnchor } from '../../utils';
 
 const OpinionStory = ({ id, title, author, avatar }) => {
   return (
-    <a href={`/story/${id}`}>
+    <OpinionAnchor href={`/story/${id}`}>
       <Wrapper>
         <Avatar alt="" src={avatar} />
-        <div>
+        <Content>
           <AuthorName>{author}</AuthorName>
           <ArticleTitle>{title}</ArticleTitle>
-        </div>
+        </Content>
       </Wrapper>
-    </a>
+    </OpinionAnchor>
   );
 };
 
+const OpinionAnchor = styled(BorderedAnchor)`
+  @media ${QUERIES.tabletOnly} {
+    flex: 1;
+    :not(:last-of-type) {
+      padding: 0;
+      border-bottom: none;
+    }
+    :not(:first-of-type) {
+      padding: 0;
+    } 
+  }
+`;
+
 const Wrapper = styled.article`
   color: var(--color-gray-900);
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 24px;
+
+  @media ${QUERIES.tabletOnly} {
+    display: revert;
+  }
 `;
 
 const Avatar = styled.img`
@@ -25,6 +47,10 @@ const Avatar = styled.img`
   height: 48px;
   border-radius: 50%;
   object-fit: cover;
+`;
+
+const Content = styled.div`
+  flex: 1;
 `;
 
 const AuthorName = styled.p`

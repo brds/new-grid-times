@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/macro';
+import { QUERIES } from '../../constants';
+import { getClampedStyle } from '../../utils';
 
 const MainStory = ({
   id,
@@ -31,6 +33,9 @@ const Image = styled.img`
   display: block;
   width: 100%;
   margin-bottom: 12px;
+  height: 320px;
+  object-fit: cover;
+  object-position: 50%;
 `;
 
 const Heading = styled.h2`
@@ -44,6 +49,10 @@ const Abstract = styled.p`
   font-size: 1rem;
   margin-bottom: 1em;
   white-space: pre-wrap;
+  ${getClampedStyle(8)}
+  @media ${QUERIES.tabletOnly} {
+    ${getClampedStyle(16)}
+  }
 `;
 
 const Location = styled.span`
